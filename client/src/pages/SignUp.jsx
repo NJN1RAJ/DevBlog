@@ -15,7 +15,6 @@ function SignUp() {
     if ((!formData.username, !formData.email, !formData.password)) {
       return setErrorMessage("Please fill out all the fields");
     }
-    console.log("Coming right in");
     try {
       setLoading(true);
       setErrorMessage(null);
@@ -39,7 +38,7 @@ function SignUp() {
   };
   return (
     <div className="min-h-screen mt-20">
-      <div className="flex p-3 max-w-3xl mx-auto flex-col gap-5 md:flex-row md:items-center">
+      <div className="flex p-3 max-w-3xl mx-auto flex-col gap-8 md:flex-row md:items-center">
         <div className="flex-1">
           <Link to="/" className="text-4xl font-bold dark:text-white">
             <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg">

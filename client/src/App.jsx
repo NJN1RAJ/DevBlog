@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import Home from "./pages/Home";
 import Header from "./pages/Header";
+import FooterPage from "./pages/FooterPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
+      <FooterPage />
     </BrowserRouter>
   );
 }
