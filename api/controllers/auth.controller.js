@@ -54,8 +54,7 @@ export const signin = async (req, res, next) => {
       {
         id: validUser._id,
       },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET
     );
     const loggedInUser = await User.findOne({ email }).select("-password");
     res
@@ -64,6 +63,45 @@ export const signin = async (req, res, next) => {
         httpOnly: true,
       })
       .json({ message: "LoggedIn successfully", user: loggedInUser });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const google = async (req, res, next) => {
+  const { name, email, googlePhotoUrl } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const userInfo = await User.findOne({ email }).select("-password");
+      res
+        .status(200)
+        .cookie("access_token", token, {
+          httpOnly: true,
+        })
+        .json(userInfo);
+    } else {
+      const generatedPassword =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8);
+      const hashedpass = bcryptjs.hashSync(generatedPassword, 10);
+      const newUser = new User({
+        username:
+          name.toLowerCase().split(" ").join("") +
+          Math.random().toString(9).slice(-4),
+        email,
+        password: hashedpass,
+        profilePicture: googlePhotoUrl,
+      });
+      await newUser.save();
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      const newCreateduser = await User.findOne({ email }).select("-password");
+      res
+        .status(200)
+        .cookie("access_token", token, { httpOnly: true })
+        .json(newCreateduser);
+    }
   } catch (error) {
     next(error);
   }
