@@ -14,7 +14,7 @@ function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() }); //here e.target.id points to the id of the imput field and sets the form data accordingly
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
