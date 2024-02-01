@@ -93,7 +93,7 @@ function SignUp() {
                   <span>Loading...</span>
                 </>
               ) : (
-                "SignUp"
+                "Sign Up"
               )}
             </Button>
             <OAuth />
