@@ -42,13 +42,13 @@ export const signin = async (req, res, next) => {
   try {
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      return next(errorHandler(400, "wrong email"));
+      return next(errorHandler(400, "wrong email or password"));
     }
 
     const validPassword = bcryptjs.compareSync(password, validUser.password);
 
     if (!validPassword) {
-      return next(errorHandler(400, "wrong password"));
+      return next(errorHandler(400, "wrong email or password"));
     }
     const token = jwt.sign(
       {
@@ -59,7 +59,7 @@ export const signin = async (req, res, next) => {
     const loggedInUser = await User.findOne({ email }).select("-password");
     res
       .status(200)
-      .cookie("access token", token, {
+      .cookie("access_token", token, {
         httpOnly: true,
       })
       .json({ message: "LoggedIn successfully", user: loggedInUser });
