@@ -12,6 +12,7 @@ import OAuth from "../components/OAuth";
 function SignIn() {
   const [formData, setFormData] = useState([]);
   const { loading, error: errorMessage } = useSelector((state) => state.user);
+  const [errormsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -20,7 +21,9 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if ((!formData.username, !formData.email, !formData.password)) {
-      return dispatch(signInFailure("Please fill all the fields"));
+      dispatch(signInFailure("Please fill all the fields"));
+      setErrorMsg(errorMessage);
+      return;
     }
     try {
       dispatch(signInStart());
@@ -32,6 +35,7 @@ function SignIn() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));
+        setErrorMsg(errorMessage);
       }
       if (res.ok) {
         dispatch(signInSuccess(data));
@@ -39,6 +43,7 @@ function SignIn() {
       }
     } catch (error) {
       dispatch(signInFailure(error.message));
+      setErrorMsg(errorMessage);
     }
   };
   return (
@@ -99,7 +104,7 @@ function SignIn() {
               Sign Up
             </Link>
           </div>
-          {errorMessage && (
+          {errormsg && (
             <Alert className="mt-5" color="failure">
               {errorMessage}
             </Alert>

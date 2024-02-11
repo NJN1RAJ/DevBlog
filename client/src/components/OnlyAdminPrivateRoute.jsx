@@ -6,6 +6,6 @@ export default function OnlyAdminPrivateRoute() {
   return currentUser && currentUser.isAdmin ? (
     <Outlet />
   ) : (
-    <Navigate to="/create-post" />
+    <Navigate to="/sign-in" />
   );
 }
