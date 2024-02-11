@@ -35,7 +35,7 @@ function SignIn() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));
-        setErrorMsg(errorMessage);
+        setErrorMsg(data.message);
       }
       if (res.ok) {
         dispatch(signInSuccess(data));
@@ -106,7 +106,7 @@ function SignIn() {
           </div>
           {errormsg && (
             <Alert className="mt-5" color="failure">
-              {errorMessage}
+              {errormsg}
             </Alert>
           )}
         </div>
