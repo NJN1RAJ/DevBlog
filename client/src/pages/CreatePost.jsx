@@ -103,6 +103,7 @@ export default function CreatePost() {
             <option value="appdev">App Development</option>
             <option value="database">Database</option>
             <option value="coding">Coding</option>
+            <option value="misc">Miscellaneous</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-dotted p-3 border-teal-500">
