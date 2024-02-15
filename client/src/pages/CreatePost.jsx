@@ -20,7 +20,6 @@ export default function CreatePost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
-  console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -75,7 +74,6 @@ export default function CreatePost() {
     } catch (error) {
       setImageUploadError("Image upload failed");
       setImageUploadProgress(null);
-      console.log(error);
     }
   };
   return (
@@ -147,7 +145,11 @@ export default function CreatePost() {
           required
           onChange={(value) => setFormData({ ...formData, content: value })}
         />
-        <Button type="submit" gradientDuoTone="purpleToPink">
+        <Button
+          type="submit"
+          gradientDuoTone="purpleToPink"
+          disabled={imageUploadProgress}
+        >
           Publish
         </Button>
         {publishError && (
