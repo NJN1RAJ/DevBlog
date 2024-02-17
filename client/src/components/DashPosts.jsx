@@ -30,11 +30,13 @@ export default function DashPosts() {
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
     try {
+      console.log(currentUser._id, startIndex);
       const res = await fetch(
-        `api/post/getposts?userId:${currentUser._id}&startIndex:${startIndex}`
+        `api/post/getposts?userId:${currentUser._id}&startIndex=${startIndex}`
       );
       console.log("It is working");
       const data = await res.json();
+      console.log(data);
       if (res.ok) {
         setUserPosts((prev) => [...prev, ...data.posts]);
         if (data.posts.length < 9) {
@@ -62,7 +64,7 @@ export default function DashPosts() {
             </Table.Head>
             {userPosts.map((post) => {
               return (
-                <Table.Body className="divide-y" key={post.title}>
+                <Table.Body className="divide-y">
                   <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                     <Table.Cell>
                       {new Date(post.updatedAt).toLocaleDateString()}
