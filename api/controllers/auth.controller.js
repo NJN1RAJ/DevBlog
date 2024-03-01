@@ -17,6 +17,16 @@ export const signup = async (req, res, next) => {
     next(errorHandler(400, "All fields are required"));
   }
 
+  const userEmailExists = await User.findOne({ email });
+  if (userEmailExists) {
+    next(errorHandler(400, "User email already exists"));
+  }
+
+  const userExists = await User.findOne({ username });
+  if (userExists) {
+    next(errorHandler(400, "Username already exists"));
+  }
+
   const hashedpass = bcryptjs.hashSync(password, 10); //we need no use of async here as we are using hashsync instead of hash
 
   const newUser = new User({
