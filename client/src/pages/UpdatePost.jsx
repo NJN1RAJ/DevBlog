@@ -37,7 +37,6 @@ export default function UpdatePost() {
         if (res.ok) {
           setPublishError(null);
           setFormData(data.posts[0]);
-          console.log(data.posts);
         }
       };
 
@@ -47,6 +46,8 @@ export default function UpdatePost() {
     }
   }, [postId]);
 
+  console.log(formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -54,12 +55,13 @@ export default function UpdatePost() {
         `/api/post/updatepost/${formData._id}/${currentUser._id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "Application/json" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         }
       );
       const data = await res.json();
       if (!res.ok) {
+        console.log("Error occured here");
         setPublishError(data.message);
         return;
       }
@@ -98,7 +100,10 @@ export default function UpdatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
             setImageUploadError(null);
             setImageUploadProgress(null);
-            setFormData({ ...formData, image: downloadUrl });
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              image: downloadUrl,
+            }));
           });
         }
       );
@@ -120,13 +125,19 @@ export default function UpdatePost() {
             id="title"
             className="flex-1"
             onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                title: e.target.value,
+              }))
             }
             value={formData.title}
           />
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                category: e.target.value,
+              }))
             }
             value={formData.category}
           >
@@ -178,7 +189,12 @@ export default function UpdatePost() {
           theme="snow"
           className="h-72 mb-12"
           required
-          onChange={(value) => setFormData({ ...formData, content: value })}
+          onChange={(value) =>
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              content: value,
+            }))
+          }
         />
         <Button
           type="submit"
