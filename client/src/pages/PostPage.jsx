@@ -43,7 +43,7 @@ export default function PostPage() {
 
   return (
     <main className="flex flex-col p-3 max-w-6xl mx-auto min-h-screen">
-      <div className="text-center text-3xl max-w-2xl mx-auto mt-10 p-3 font-serif lg:text-4xl">
+      <div className="text-center text-3xl max-w-2xl mx-auto mt-10 p-3 font-serif md:text-4xl lg:text-5xl">
         {post && post.title}
       </div>
       <Link
