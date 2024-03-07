@@ -9,8 +9,8 @@ export default function CallToAction() {
         <p className="text-gray-500 my-2">Subscribe to our newsletter</p>
         <Link to={"/"}>
           <Button
-            gradientDuoTone="purpleToPink"
-            className="rounded-tl-xl rounded-bl-none rounded-br-xl rounded-tr-none mx-auto w-full "
+            className="rounded-tl-xl rounded-bl-none rounded-br-xl rounded-tr-none mx-auto w-full"
+            color="blue"
           >
             Join Now
           </Button>
