@@ -11,8 +11,9 @@ export default function CallToAction() {
           <Button
             className="rounded-tl-xl rounded-bl-none rounded-br-xl rounded-tr-none mx-auto w-full"
             color="blue"
+            disabled
           >
-            Join Now
+            Coming Soon
           </Button>
         </Link>
       </div>
