@@ -34,11 +34,7 @@ export default function FooterCom() {
                 >
                   Portfolio
                 </Footer.Link>
-                <Footer.Link
-                  href="/about"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Footer.Link href="/about" rel="noopener noreferrer">
                   Dev's Blog
                 </Footer.Link>
               </Footer.LinkGroup>

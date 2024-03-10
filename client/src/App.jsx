@@ -3,7 +3,7 @@ import SignUp from "./pages/SignUp";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
-import Projects from "./pages/Projects";
+import Subscribe from "./pages/Subscribe";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import FooterPage from "./components/FooterPage";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
-        <Route path="/projects" element={<Projects />} />
+        <Route path="/subscribe" element={<Subscribe />} />
         <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <FooterPage />

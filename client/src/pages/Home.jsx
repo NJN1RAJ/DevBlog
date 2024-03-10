@@ -58,9 +58,6 @@ function Home() {
           </div>
         )}
       </div>
-      <div className="mx-5 p-3 bg-amber-100 dark:bg-slate-700">
-        <CallToAction />
-      </div>
     </div>
   );
 }
